@@ -1,6 +1,6 @@
 import Button from "../Button";
 import { useContext } from "react";
-import {CardMain, Sec} from './styles'
+import {CardMain, Sec, Countainer} from './styles'
 import { CatalogueContext } from "../../providers/catalogue";
 import { CartContext } from "../../providers/cart";
 
@@ -15,42 +15,45 @@ export const ProductList = ({type}: Prop) => {
     const { cart } = useContext(CartContext);
 
     return (
-        <div>
-          <section>
+        <Countainer>
+          
             {
-              type === "catalogue" && <p> Catalogue: </p>
+              type === "catalogue" && <h2> Catalogue: </h2>
             }
             <Sec>
               {
                 type === "catalogue" &&
                   catalogue.map((item, index) => (
                       <CardMain key={index}>
-                        <p>{item.name}</p> 
+                        <img src={item.img} />
+                        <p>{item.name}</p>  
+                        <p className='price'>R$ {item.price}</p> 
                         <Button type={type} item={item} />
                       </CardMain>
                   ))
               }
             </Sec>
             
-            </section>
+            
   
-           <section>
+           
             {
-              type === "cart" && <p> Cart: </p>
+              type === "cart" && <h2> Cart: </h2>
             }
             <Sec>
               {
                 type === "cart" &&
                   cart.map((item, index) => (
                     <CardMain key={index}>
+                      <img src={item.img} />
                       <p>{item.name}</p> 
                       <Button type={type} item={item} />
                     </CardMain>
                   ))
               }
             </Sec>
-           </section>
-        </div>
+           
+        </Countainer>
     );
 };
   

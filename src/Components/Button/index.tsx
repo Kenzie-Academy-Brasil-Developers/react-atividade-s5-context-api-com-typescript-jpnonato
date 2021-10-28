@@ -3,7 +3,21 @@ import { ButtonStyled } from './styles'
 import { CartContext } from "../../providers/cart";
 import { CatalogueContext } from "../../providers/catalogue";
 
-const Button = ({ type, item }) => {
+interface itens {
+  img: string;
+  info: string;
+  name: string;
+  price: number;
+}
+
+
+
+interface Props {
+    type: string
+    item: itens
+}
+
+const Button = ({ type, item }: Props) => {
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
   const { catalogue, addToCatalogue, removeFromCatalogue } = useContext( CatalogueContext);
 

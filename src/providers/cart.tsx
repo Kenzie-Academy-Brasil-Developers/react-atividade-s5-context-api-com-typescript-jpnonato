@@ -7,31 +7,34 @@ interface cartProps {
 
 interface itens {
 
+    img: string;
+    info: string;
     name: string;
     price: number;
 }
 
-interface cartItem {
-    item: itens
-
+interface cartContextData {
+    cart: itens[]
+    addToCart: (item: itens) => void
+    removeFromCart: (item: itens) => void
 }
 
 
-export const CartContext = createContext({})
+export const CartContext = createContext<cartContextData>({} as cartContextData )
 
 export const CartProvider = ({children}:cartProps) => {
 
-    const [cart, setCart] = useState<cartItem[]>([])
+    const [cart, setCart] = useState<itens[]>([])
     
-    const addToCart =(item: cartItem) =>{
+    const addToCart =(item: itens) =>{
 
         setCart([...cart, item])
 
     }
 
-    const removeFromCart = (item: cartItem) => {
+    const removeFromCart = (item: itens) => {
 
-        const filterCart = cart.filter((e: cartItem) => e !== item)
+        const filterCart = cart.filter((e: itens) => e !== item)
         setCart( filterCart)
 
     }
